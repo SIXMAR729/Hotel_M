@@ -1,4 +1,4 @@
-<? php
+
 <html>
 
 <html lang="en">
@@ -12,35 +12,8 @@
 </head>
 <body class="text-gray-800 bg-gray-50">
     <!-- Navigation -->
-    <nav class="navbar fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-gray-800 heading-font">Royal Palm Grand</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link active-nav">Home</a>
-                <a href="#rooms" class="nav-link">Rooms & Suites</a>
-                <a href="#dining" class="nav-link">Dining</a>
-                <a href="#amenities" class="nav-link">Amenities</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="#booking" class="bg-[#c19a6b] hover:bg-[#a9845a] text-white px-4 py-2 rounded-md font-medium transition duration-300">Book Now</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                <i class="fas fa-bars text-2xl text-gray-800"></i>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 py-3 border-t">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="nav-link active-nav">Home</a>
-                <a href="#rooms" class="nav-link">Rooms & Suites</a>
-                <a href="#dining" class="nav-link">Dining</a>
-                <a href="#amenities" class="nav-link">Amenities</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="#booking" class="bg-[#c19a6b] hover:bg-[#a9845a] text-white px-4 py-2 rounded-md font-medium text-center transition duration-300">Book Now</a>
-            </div>
-        </div>
-    </nav>
+    
+    <?php include 'base/_navbar.php'; ?>
 
     <!-- Hero Section -->
     <section id="home" class="hero-image h-screen flex items-center pt-20">
@@ -215,7 +188,7 @@
             </div>
             
             <div class="text-center mt-12 fade-in delay-4">
-                <a href="#" class="inline-flex items-center px-6 py-3 border border-[#c19a6b] text-[#c19a6b] hover:bg-[#c19a6b]/10 rounded-md font-medium transition duration-300">
+                <a href="./roompage.php" class="inline-flex items-center px-6 py-3 border border-[#c19a6b] text-[#c19a6b] hover:bg-[#c19a6b]/10 rounded-md font-medium transition duration-300">
                     View All Room Types <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -560,45 +533,7 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            });
-        });
+  
 
         // Room card hover effect
         const roomCards = document.querySelectorAll('.room-card');
@@ -632,4 +567,4 @@
     </script>
 </body>
 </html>
-        ?>
+        
