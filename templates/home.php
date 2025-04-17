@@ -1,3 +1,12 @@
+<?php include '_login_modal.php'; ?>
+
+<?php
+
+$showLoginModal = $_SESSION['show_login_modal'] ?? false;
+$loginError = $_SESSION['login_error'] ?? '';
+
+unset($_SESSION['show_login_modal'], $_SESSION['login_error']);
+?>
 
 <html>
 
@@ -7,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Palm Grand | Luxury Five-Star Hotel</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./static/css/style.css">
 </head>
@@ -15,19 +25,7 @@
     
     <?php include 'base/_navbar.php'; ?>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-image h-screen flex items-center pt-20">
-        <div class="container mx-auto px-6 text-white text-center fade-in">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 heading-font">Experience Unparalleled Luxury</h1>
-                <p class="text-xl md:text-2xl mb-8">Where timeless elegance meets contemporary comfort in the heart of the city</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#booking" class="bg-[#c19a6b] hover:bg-[#a9845a] text-white px-8 py-4 rounded-md font-medium transition duration-300">Book Your Stay</a>
-                    <a href="#rooms" class="bg-transparent border-2 border-white hover:bg-white/20 px-8 py-4 rounded-md font-medium transition duration-300">Explore Rooms</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<?php include './base/_hero.php'; ?>
 
     <!-- Booking Widget -->
     <section id="booking" class="bg-white py-8 shadow-lg -mt-16 relative z-10 mx-6 rounded-lg fade-in delay-1">
@@ -533,7 +531,7 @@
     </footer>
 
     <script>
-  
+
 
         // Room card hover effect
         const roomCards = document.querySelectorAll('.room-card');

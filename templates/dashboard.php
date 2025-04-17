@@ -29,7 +29,7 @@ $lastname = $_SESSION["profile"]["details"]["lastname"] ?? '';
         <div class="space-x-2">
             <a href="./profile.php" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">ข้อมูลส่วนตัว</a>
             <a href="./rooms.php" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">การจองห้อง</a>
-            <a href="./logout.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">ออกจากระบบ</a>
+            <a href="./home.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">ออกจากระบบ</a>
         </div>
     </div>
 

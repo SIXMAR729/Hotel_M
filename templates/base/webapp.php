@@ -20,6 +20,7 @@
   background: #f1f1f1;
   font-family: "Poppins", sans-serif;
   bottom: 0;
+  z-index: 99999;
 }
 
 .menu {
