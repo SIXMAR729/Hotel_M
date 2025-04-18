@@ -17,6 +17,7 @@ unset($_SESSION['show_login_modal'], $_SESSION['login_error']);
     <title>Royal Palm Grand | Luxury Five-Star Hotel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./static/css/style.css">
 </head>
@@ -29,32 +30,35 @@ unset($_SESSION['show_login_modal'], $_SESSION['login_error']);
 
     <!-- Booking Widget -->
     <section id="booking" class="bg-white py-8 shadow-lg -mt-16 relative z-10 mx-6 rounded-lg fade-in delay-1">
-        <div class="container mx-auto px-6">
-            <form class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div>
-                    <label class="block text-gray-700 mb-2">Check In</label>
-                    <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-md date-input">
-                </div>
-                <div>
-                    <label class="block text-gray-700 mb-2">Check Out</label>
-                    <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-md date-input">
-                </div>
-                <div>
-                    <label class="block text-gray-700 mb-2">Guests</label>
-                    <select class="w-full px-4 py-3 border border-gray-300 rounded-md">
-                        <option>1 Adult</option>
-                        <option>2 Adults</option>
-                        <option>3 Adults</option>
-                        <option>4 Adults</option>
-                        <option>Family (2+2)</option>
-                    </select>
-                </div>
-                <div class="flex items-end">
-                    <button type="submit" class="w-full bg-[#c19a6b] hover:bg-[#a9845a] text-white px-6 py-3 rounded-md font-medium transition duration-300">Check Availability</button>
-                </div>
-            </form>
-        </div>
-    </section>
+    <div class="container mx-auto px-6">
+        <form id="checkInForm" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+                <label class="block text-gray-700 mb-2">Check In</label>
+                <input type="date" name="checkin" class="w-full px-4 py-3 border border-gray-300 rounded-md date-input" required>
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Check Out</label>
+                <input type="date" name="checkout" class="w-full px-4 py-3 border border-gray-300 rounded-md date-input" required>
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Guests</label>
+                <select name="guests" class="w-full px-4 py-3 border border-gray-300 rounded-md" required>
+                    <option value="1 Adult">1 Adult</option>
+                    <option value="2 Adults">2 Adults</option>
+                    <option value="3 Adults">3 Adults</option>
+                    <option value="4 Adults">4 Adults</option>
+                    <option value="Family (2+2)">Family (2+2)</option>
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="w-full bg-[#c19a6b] hover:bg-[#a9845a] text-white px-6 py-3 rounded-md font-medium transition duration-300">
+                    Check Availability
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
 
     <!-- Welcome Section -->
     <section class="py-20 bg-white">
@@ -531,6 +535,55 @@ unset($_SESSION['show_login_modal'], $_SESSION['login_error']);
     </footer>
 
     <script>
+// Booking Script
+document.getElementById("checkInForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const checkIn = form.checkin.value;
+    const checkOut = form.checkout.value;
+    const guests = form.guests.value;
+
+    if (!checkIn || !checkOut || !guests) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Incomplete',
+            text: 'Please fill in all fields.',
+        });
+        return;
+    }
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    // Check if check-in is before check-out
+    if (checkInDate >= checkOutDate) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Dates',
+            text: 'Check-Out date must be after Check-In date.',
+        });
+        return;
+    }
+
+    // Success popup
+    Swal.fire({
+        icon: 'success',
+        title: 'Availability Checked',
+        html: `
+            <p><strong>Check In:</strong> ${checkIn}</p>
+            <p><strong>Check Out:</strong> ${checkOut}</p>
+            <p><strong>Guests:</strong> ${guests}</p>
+            <p class="mt-2">Rooms are available. Proceed to booking!</p>
+        `,
+        confirmButtonText: 'Continue',
+        confirmButtonColor: '#c19a6b'
+    }).then(result => {
+        if (result.isConfirmed) {
+            window.location.href = './roompage.php'; // or redirect to actual booking page
+        }
+    });
+});
 
 
         // Room card hover effect
